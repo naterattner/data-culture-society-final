@@ -1,4 +1,5 @@
-// import {select, selectAll} from '../node_modules/d3/dist/d3.min.js';
+// import * as d3 from '../node_modules/d3/dist/d3.min.js';
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 
 /* CONSTANTS AND GLOBALS */
