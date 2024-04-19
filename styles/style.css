@@ -41,3 +41,13 @@ main {
 section {
   margin-bottom: 20px;
 }
+
+.pull-quote {
+    /* font-style: italic; */
+    font-size: 1.2em;
+    color: #333;
+    background-color: #f9f9f9;
+    border-left: 5px solid #ccc;
+    padding: 10px;
+    margin: 20px 0;
+}
