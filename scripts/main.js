@@ -50,7 +50,7 @@ fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/
     .then(response => response.json())
     .then(data => {
         // Process the JSON data
-        console.log(data);
+        // console.log(data);
 		init(data);
     })
     .catch(error => {
