@@ -45,7 +45,8 @@ let state = {
 
 // data = './assets/data/merged_data_1yr.json'
 
-fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/master/assets/data/output.json')
+// fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/master/assets/data/output.json')
+fetch('../assets/data/output_no_dir.json')
     .then(response => response.json())
     .then(data => {
         // Process the JSON data
@@ -60,8 +61,6 @@ fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/
 // this will be run *one time* when the data finishes loading in
 function init(data) {
 
-	console.log('init');
-
 	// The force simulation mutates links and nodes, so create a copy
 	// so that re-evaluating this cell produces the same result.
 	const links = data.links.map(d => ({...d}));
@@ -70,7 +69,7 @@ function init(data) {
 	// Create a simulation with several forces.
 	const simulation = d3.forceSimulation(nodes)
 	.force("link", d3.forceLink(links).id(d => d.film))
-	.force("charge", d3.forceManyBody())
+	.force("charge", d3.forceManyBody().strength(-50))
 	.force("x", d3.forceX())
 	.force("y", d3.forceY());
 
@@ -81,6 +80,7 @@ function init(data) {
 		.attr("height", height)
 		.attr("viewBox", [-width / 2, -height / 2, width, height])
 		.attr("style", "max-width: 100%; height: auto;")
+		// .attr("style", "background-color:grey")
 
 
 	// Add a line for each link, and a circle for each node.
@@ -90,7 +90,8 @@ function init(data) {
 	.selectAll("line")
 	.data(links)
 	.join("line")
-		.attr("stroke-width", d => Math.sqrt(d.value));
+		// .attr("stroke-width", d => Math.sqrt(d.value));
+		.attr("stroke-width", d => (d.value*1.5));
 
 	const node = svg.append("g")
 		.attr("stroke", "#fff")
@@ -99,7 +100,7 @@ function init(data) {
 	  .data(nodes)
 	  .join("circle")
 		.attr("r", 5)
-		.attr("fill", 'black');
+		.attr("fill", '#0096C7');
 
 	node.append("title")
 		.text(d => d.film);
@@ -147,7 +148,34 @@ function init(data) {
 	  // When this cell is re-run, stop the previous simulation. (This doesn’t
 	  // really matter since the target alpha is zero and the simulation will
 	  // stop naturally, but it’s a good practice.)
-	  invalidation.then(() => simulation.stop());
+	//   invalidation.then(() => simulation.stop());
+
+	  // Add tooltips on mouseover
+	  
+	  // Create tooltip element
+	  const tooltip = d3.select(".tooltip") 
+	  const tooltipFilm = d3.select(".tooltip-film")
+	  const tooltipDirector = d3.select(".tooltip-director")
+	//   .append("div")
+	//   .html("tooltip" )
+	//   .attr("class", "tooltip");
+
+	  node.on("mouseover", function(event, d) {
+
+		// Highlight node
+		d3.select(this).attr("fill", "#000435");
+
+		// Update tooltip text
+		tooltipFilm.html(d.film);
+		// tooltipDirector.html("Directed by " + d.director);
+	  })
+	  .on("mouseout", function() {
+		// Hide tooltip
+		tooltipFilm.html("");
+		tooltipDirector.html("");
+
+		d3.select(this).attr("fill", "#0096C7");
+	  });
 	
 
 }

@@ -6,6 +6,11 @@ body {
 	/* padding: 1em !important; */
   }
 
+svg {
+	margin-top: -30px;
+	margin-bottom: -30px;
+}
+
 header, main {
   padding: 20px;
 }
@@ -51,3 +56,23 @@ section {
     padding: 10px;
     margin: 20px 0;
 }
+
+.tooltip {
+	position: absolute;
+	margin: 0 auto;
+
+	background-color: #fff;
+	/* border: 1px solid #ccc; */
+	/* border-radius: 5px; */
+	padding-top: 0px;
+	/* pointer-events: none; */
+	opacity: 1;
+  }
+
+  .tooltip-film{
+	font-weight: 500;
+  }
+
+  .tooltip-director{
+	font-weight: 300;
+  }
