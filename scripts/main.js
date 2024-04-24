@@ -45,8 +45,8 @@ let state = {
 
 // data = './assets/data/merged_data_1yr.json'
 
-// fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/master/assets/data/output.json')
-fetch('../assets/data/output_no_dir.json')
+fetch('https://raw.githubusercontent.com/naterattner/data-culture-society-final/master/assets/data/output_no_dir.json')
+// fetch('../assets/data/output_no_dir.json')
     .then(response => response.json())
     .then(data => {
         // Process the JSON data
