@@ -69,7 +69,7 @@ function init(data) {
 	// Create a simulation with several forces.
 	const simulation = d3.forceSimulation(nodes)
 	.force("link", d3.forceLink(links).id(d => d.film))
-	.force("charge", d3.forceManyBody().strength(-50))
+	.force("charge", d3.forceManyBody().strength(-50)) //.strength(-50))
 	.force("x", d3.forceX())
 	.force("y", d3.forceY());
 
